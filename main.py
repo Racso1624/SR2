@@ -2,20 +2,14 @@ from gl import Render
 
 r = Render()
 
-r.glCreateWindow(100, 100)
-
-r.glViewPort(25, 25, 30, 30)
+r.glCreateWindow(1000, 1000)
 
 r.glClearColor(0.2, 0.4, 0.6)
 
-r.glColor(0.5, 0.3, 0.6)
-
-r.glViewportColor(0.1, 0.6, 0.4)
-
 r.glClear()
 
-r.glClearViewport()
+r.glLine(100, 300, 300, 100)
 
-r.glVertex(0, 0)
+r.glLine(300, 500, 100, 100)
 
-r.glFinish("punto.bmp")
+r.glFinish("casa.bmp")

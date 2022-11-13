@@ -69,6 +69,49 @@ class Render(object):
     def glPoint(self, x, y, color = None):
         self.framebuffer[x][y] = color or self.render_color
 
+    def glLine(self, x0, x1, y0, y1, color = None):
+        
+        line_color = color or self.render_color
+
+        if x0 == x1:
+            if y0 == y1:
+                self.glPoint(x0, y0, line_color)
+        
+        dx = abs(x1 - x0)
+        dy = abs(y1 - y0)
+
+        steep = dy > dx
+
+        if steep:
+            x0, y0 = y0, x0
+            x1, y1 = y1, x1
+
+        if x0 > x1:
+            x0, x1 = x1, x0
+            y0, y1 = y1, y0
+
+        dx = abs(x1 - x0)
+        dy = abs(y1 - y0)
+
+        offset = 0
+
+        threshold = dx
+
+        y = y0
+
+        for x in range(x0, x1 + 1):
+            if steep:
+                self.glPoint(x, y, line_color)
+            else:
+                self.glPoint(y, x, line_color)
+
+            offset += dy * 2
+            
+            if offset >= threshold:
+                y += 1 if y0 < y1 else -1
+                threshold += dx * 2
+
+
     def glFinish(self, filename):
         f = open(filename, 'bw')
 
