@@ -1,3 +1,8 @@
+#Oscar Fernando López Barrios
+#Carné 20679
+#Gráficas Por Computadora
+#SR2
+
 import struct
 
 def char(c):
